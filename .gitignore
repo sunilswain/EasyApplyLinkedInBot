@@ -10,3 +10,7 @@ old
 secrets.py
 config/personals.py
 .venv
+
+Lib/
+Scripts/
+pyvenv.cfg

@@ -21,27 +21,27 @@ GitHub:     https://github.com/GodsScion/Auto_job_applier_linkedIn
 default_resume_path = "all resumes/default/resume.pdf"      # (In Development)
 
 # What do you want to answer for questions that ask about years of experience you have, this is different from current_experience? 
-years_of_experience = "5"          # A number in quotes Eg: "0","1","2","3","4", etc.
+years_of_experience = "2"          # A number in quotes Eg: "0","1","2","3","4", etc.
 
 # Do you need visa sponsorship now or in future?
 require_visa = "No"               # "Yes" or "No"
 
 # What is the link to your portfolio website, leave it empty as "", if you want to leave this question unanswered
-website = "https://github.com/GodsScion"                        # "www.example.bio" or "" and so on....
+website = "https://github.com/sunilswain"                        # "www.example.bio" or "" and so on....
 
 # Please provide the link to your LinkedIn profile.
-linkedIn = "https://www.linkedin.com/in/saivigneshgolla/"       # "https://www.linkedin.com/in/example" or "" and so on...
+linkedIn = "https://www.linkedin.com/in/sunil-swain/"       # "https://www.linkedin.com/in/example" or "" and so on...
 
 # What is the status of your citizenship? # If left empty as "", tool will not answer the question. However, note that some companies make it compulsory to be answered
 # Valid options are: "U.S. Citizen/Permanent Resident", "Non-citizen allowed to work for any employer", "Non-citizen allowed to work for current employer", "Non-citizen seeking work authorization", "Canadian Citizen/Permanent Resident" or "Other"
-us_citizenship = "U.S. Citizen/Permanent Resident"
+us_citizenship = "Non-citizen seeking work authorization"
 
 
 
 ## SOME ANNOYING QUESTIONS BY COMPANIES 🫠 ##
 
 # What to enter in your desired salary question (American and European), What is your expected CTC (South Asian and others)?, only enter in numbers as some companies only allow numbers,
-desired_salary = 1200000          # 80000, 90000, 100000 or 120000 and so on... Do NOT use quotes
+desired_salary = 0          # 80000, 90000, 100000 or 120000 and so on... Do NOT use quotes
 '''
 Note: If question has the word "lakhs" in it (Example: What is your expected CTC in lakhs), 
 then it will add '.' before last 5 digits and answer. Examples: 
@@ -81,25 +81,34 @@ then it will divide by 30 or 7 and answer respectively. Examples:
 '''
 
 # Your LinkedIn headline in quotes Eg: "Software Engineer @ Google, Masters in Computer Science", "Recent Grad Student @ MIT, Computer Science"
-headline = "Full Stack Developer with Masters in Computer Science and 4+ years of experience" # "Headline" or "" to leave this question unanswered
+headline = "Python Developer, ML & AI, Data Science & Generative AI" # "Headline" or "" to leave this question unanswered
 
 # Your summary in quotes, use \n to add line breaks
-summary = "I'm a Senior Software Engineer at Amazon with Masters in CS and 4+ years of experience in developing and maintaining Full Stack Web applications and cloud solutions.\n Specialized in React, Node.js, and Python."
+summary = "At ESSPL, our collaborative efforts are centered on innovating AI solutions through my expertise in speech recognition. My role as an AI/ML Associate is pivotal in meeting the evolving business needs with cutting-edge AI applications that are transforming the industry."
 '''
 Note: If left empty as "", the tool will not answer the question. However, note that some companies make it compulsory to be answered. Use \n to add line breaks.
 ''' 
 
 # Your cover letter in quotes, use \n to add line breaks (This question makes sense though)
-cover_letter = "Cover Letter"
+cover_letter = """Dear Hiring Manager,
+I am excited to apply for the open position at your organization. With a strong background in AI/ML development, Python programming, and web development, I am eager to bring my skills and experience to your innovative team.
+Throughout my career, I have had the opportunity to work on a range of projects that have not only honed my technical abilities but also fueled my passion for solving complex problems. One of my key projects involved developing an Automated Number Plate Recognition System that streamlined employee identification through advanced license plate analysis. This project allowed me to deepen my expertise in machine learning and computer vision.
+Additionally, I worked on fine-tuning the LLaMA2-7B model for custom applications using techniques like LoRA and PEFT, which significantly improved the model's performance. I also developed a Retrieval-Augmented Generation (RAG) system that leverages models like LLaMA3-8B and Mistral for dynamic data retrieval and querying, showcasing my ability to work with state-of-the-art technologies.
+My journey into AI and machine learning began somewhat randomly, but it quickly grew into a passion. I thrive on the challenge of combining logic with creativity to develop practical, impactful applications. My skills in Python, frameworks like Django and Flask, and experience with cloud platforms such as AWS and Microsoft Azure make me confident in my ability to contribute effectively to your team.
+I am particularly drawn to your organization's commitment to innovation and its role in shaping the future of technology. I am eager to apply my experience in artificial intelligence, machine learning, data analysis, and software development to contribute to your cutting-edge projects. I am also keen to continue learning and growing in a dynamic environment that encourages innovation.
+I would welcome the opportunity to discuss how my background, skills, and passion align with the needs of your team. Thank you for considering my application. I look forward to the possibility of contributing to your organization's success.
+Sincerely,
+Sunil"""
+
 '''
 Note: If left empty as "", the tool will not answer the question. However, note that some companies make it compulsory to be answered. Use \n to add line breaks.
 ''' 
 
 # Name of your most recent employer
-recent_employer = "Not Applicable" # "", "Lala Company", "Google", "Snowflake", "Databricks"
+recent_employer = "Enterprise System Solutions Private Limited" # "", "Lala Company", "Google", "Snowflake", "Databricks"
 
 # Example question: "On a scale of 1-10 how much experience do you have building web or mobile applications? 1 being very little or only in school, 10 being that you have built and launched applications to real users"
-confidence_level = "8"             # Any number between "1" to "10" including 1 and 10, put it in quotes ""
+confidence_level = "9"             # Any number between "1" to "10" including 1 and 10, put it in quotes ""
 ##
 
 
@@ -108,7 +117,7 @@ confidence_level = "8"             # Any number between "1" to "10" including 1 
 
 ## Allow Manual Inputs
 # Should the tool pause before every submit application during easy apply to let you check the information?
-pause_before_submit = True         # True or False ,   Will be treated as False if run_in_background is True
+pause_before_submit = False         # True or False ,   Will be treated as False if run_in_background is True
 
 # Should the tool pause if it needs help in answering questions during easy apply?
 # Note: If set as False will answer randomly...
@@ -116,7 +125,7 @@ pause_at_failed_question = True    # True or False ,   Will be treated as False 
 ##
 
 # Do you want to overwrite previous answers?
-overwrite_previous_answers = False # True or False
+overwrite_previous_answers = True # True or False
 
 
 
