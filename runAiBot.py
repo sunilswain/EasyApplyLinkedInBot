@@ -34,6 +34,7 @@ from config.secrets import *
 from config.settings import *
 from modules.helpers import *
 from modules.clickers_and_finders import *
+from modules.ai import isTitleRelevant
 from modules.validator import validate_config
 from typing import Literal
 import traceback
@@ -307,39 +308,6 @@ def get_job_main_details(job: WebElement, blacklisted_companies: set, rejected_j
     buffer(click_gap)
     return (job_id,title,company,work_location,work_style,skip)
 
-def get_details_of_jobs(job_listing, blacklisted_companies: set, rejected_jobs: set):
-    jobs = []
-    for job in job_listing:
-        job_details_button = job.find_element(By.CLASS_NAME, "job-card-list__title")
-        scroll_to_view(driver, job_details_button, True)
-        title = job_details_button.text
-        company = job.find_element(By.CLASS_NAME, "job-card-container__primary-description").text
-        job_id = job.get_dom_attribute('data-occludable-job-id')
-        work_location = job.find_element(By.CLASS_NAME, "job-card-container__metadata-item").text
-        work_location = work_location[:work_location.rfind('(')].strip()
-        work_style = work_location[work_location.rfind('(')+1:work_location.rfind(')')]
-
-        # Skip if previously rejected due to blacklist or already applied
-        skip = False
-        if company in blacklisted_companies:
-            logger.info(f'Skipping "{title} | {company}" job (Blacklisted Company). Job ID: {job_id}!')
-            skip = True
-        elif job_id in rejected_jobs: 
-            logger.info(f'Skipping previously rejected "{title} | {company}" job. Job ID: {job_id}!')
-            skip = True
-        try:
-            if job.find_element(By.CLASS_NAME, "job-card-container__footer-job-state").text == "Applied":
-                skip = True
-                logger.info(f'Already applied to "{title} | {company}" job. Job ID: {job_id}!')
-        except: pass
-        try: 
-            if not skip: job_details_button.click()
-        except Exception as e:
-            logger.warning(f'Failed to click "{title} | {company}" job on details button. Job ID: {job_id}!', exc_info=True) 
-            discard_job()
-            job_details_button.click() # To pass the error outside
-        buffer(click_gap)
-        return (job_id,title,company,work_location,work_style,skip)
 
 # Function to check for Blacklisted words in About Company
 def check_blacklist(rejected_jobs: set, job_id: str, company: str, blacklisted_companies: set) -> tuple[set, set, WebElement] | ValueError:
@@ -751,7 +719,7 @@ def apply_to_jobs(search_terms: list[str]) -> None:
 
                     job_id,title,company,work_location,work_style,skip = get_job_main_details(job, blacklisted_companies, rejected_jobs)
                     
-                    print("--"*10 + " " + title)
+                    logger.debug("--"*10 + " " + title)
 
                     if skip: continue
                     # Redundant fail safe check for applied jobs!
@@ -761,6 +729,16 @@ def apply_to_jobs(search_terms: list[str]) -> None:
                             continue
                     except Exception as e:
                         logger.warning(f'Trying to Apply to "{title} | {company}" job. Job ID: {job_id}')
+                    
+                    # Check for wheter the job is relevant or not using AI
+                    try:
+                        if title not in search_terms:
+                            isRelevant = isTitleRelevant(search_terms, title)
+                            if isRelevant == "No":
+                                logger.info(f"Skpping job with title {title}, since it is not relevant", exc_info=True) 
+                                continue
+                    except Exception as e:
+                        logger.error("Couldn't check relevancy of the job..", exc_info=True)
 
                     job_link = "https://www.linkedin.com/jobs/view/"+job_id
                     application_link = "Easy Applied"
