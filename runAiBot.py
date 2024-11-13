@@ -732,7 +732,7 @@ def apply_to_jobs(search_terms: list[str]) -> None:
                     
                     # Check for wheter the job is relevant or not using AI
                     try:
-                        if title not in search_terms:
+                        if title not in search_terms and use_ai_for_checking_job_title:
                             isRelevant = isTitleRelevant(search_terms, title)
                             if isRelevant == "No":
                                 logger.info(f"Skpping job with title {title}, since it is not relevant", exc_info=True) 

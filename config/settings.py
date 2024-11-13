@@ -77,7 +77,7 @@ stealth_mode = True             # True or False
 # use_resume_generator = False       # True or False ,   This feature may only work with 'stealth_mode = True'. As ChatGPT website is hosted by CloudFlare which is protected by Anti-bot protections!
 
 
-
+use_ai_for_checking_job_title = False
 
 
 
