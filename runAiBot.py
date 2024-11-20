@@ -954,12 +954,12 @@ def run(total_runs: int) -> int:
     logger.info(f"Currently looking for jobs posted within '{date_posted}' and sorting them by '{sort_by}'")
     apply_to_jobs(search_terms)
     logger.info("########################################################################################################################\n")
-    if not dailyEasyApplyLimitReached:
-        logger.info("Sleeping for 10 min...")
-        sleep(300)
-        logger.info("Few more min... Gonna start with in next 5 min...")
-        sleep(300)
-    buffer(3)
+    # if not dailyEasyApplyLimitReached:
+    #     logger.info("Sleeping for 10 min...")
+    #     sleep(300)
+    #     logger.info("Few more min... Gonna start with in next 5 min...")
+    #     sleep(300)
+    # buffer(3)
     return total_runs + 1
 
 
